@@ -24,11 +24,11 @@ body {
         "footer";
     overflow-x: hidden;
     
-    /* ✨ حركة أنيميشن ناعمة جداً لكل عناصر الموقع أثناء التحويل بين الثيمات */
+    
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* ⚪ الوضع الفاتح (Light Mode) */
+
 body.light-mode {
     --bg-body: #f5f6f8;
     --bg-card: #ffffff;
@@ -38,17 +38,15 @@ body.light-mode {
     --text-muted: #65676b;
 }
 
-/* ==========================================================================
-   🎯 ستايل زرار الجدول (فصل سلوك المظلم عن الفاتح)
-   ========================================================================== */
-/* شكل الزرار الافتراضي (في الوضع المظلم) -> أزرق فاقع ومضيء */
+/*  ========================================================================== */
+
 .schedule-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px; 
     background-color: var(--bg-body); 
-    color: #00e5ff !important; /* أزرق فاقع (Electric Blue) */
-    border: 1px solid #00e5ff !important; /* إطار أزرق فاقع */
+    color: #00e5ff !important; 
+    border: 1px solid #00e5ff !important; 
     border-radius: 20px; 
     text-decoration: none;
     padding: 8px 16px;
@@ -60,12 +58,12 @@ body.light-mode {
 
 .schedule-btn:hover {
     background-color: #00e5ff !important; 
-    color: #121212 !important; /* النص يقلب أسود مريح في الضلمة */
+    color: #121212 !important; 
     box-shadow: 0 0 20px rgba(0, 229, 255, 0.7); 
     transform: translateY(-2px);
 }
 
-/* شكل الزرار لما يقلب للوضع الفاتح (Light Mode) عشان ميبقاش فاقع بزيادة وعين الطالب ترتاح */
+
 body.light-mode .schedule-btn {
     color: #037d93 !important; 
     border-color: #037d93 !important;
@@ -183,7 +181,7 @@ body.light-mode .modern-header {
     text-shadow: 0 0 15px rgba(0, 188, 212, 0.1);
 }
 /* ==========================================================================
-   📱 RESPONSIVE ROW STYLES FOR MOBILE (By Mina)
+   📱 RESPONSIVE ROW STYLES 
    ========================================================================== */
 @media (max-width: 480px) {
     .modern-header {
@@ -294,14 +292,14 @@ main {
     border: 1px solid var(--border-color);
     padding: 25px;
     border-radius: 14px;
-    text-align: right; /* تعديل ليتناسب مع المحتوى العربي الجديد */
+    text-align: right; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease;
 }
 
-/* إضافة كلاس الوصف الجديد للسيو */
+
 .subject-desc {
     font-size: 13px;
     color: var(--text-muted);
@@ -327,7 +325,7 @@ body.light-mode .subject-card:hover {
     margin-bottom: 10px;
     color: var(--text-main);
     text-transform: capitalize;
-    border-right: 3px solid #00bcd4; /* تحويل لليمين ليناسب العربي */
+    border-right: 3px solid #00bcd4; 
     padding-right: 10px;
     border-left: none;
     padding-left: 0;
