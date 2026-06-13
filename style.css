@@ -1,0 +1,592 @@
+/* ==========================================================================
+   1. GLOBAL STYLES & VARIABLES
+   ========================================================================== */
+body {
+    /* الوضع الافتراضي (المظلم - Dark Mode) */
+    --bg-body: rgb(7, 7, 7);
+    --bg-card: #0b0b0b;
+    --bg-sidebar: #0d0d0d;
+    --border-color: #161616;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-body);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 15px;
+    grid-template-areas: 
+        "head"
+        "hero"
+        "main"
+        "footer";
+    overflow-x: hidden;
+    
+    /* ✨ حركة أنيميشن ناعمة جداً لكل عناصر الموقع أثناء التحويل بين الثيمات */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ⚪ الوضع الفاتح (Light Mode) */
+body.light-mode {
+    --bg-body: #f5f6f8;
+    --bg-card: #ffffff;
+    --bg-sidebar: #e4e6eb;
+    --border-color: #cbd5e1;
+    --text-main: #1a1a1a;
+    --text-muted: #65676b;
+}
+
+/* ==========================================================================
+   🎯 ستايل زرار الجدول (فصل سلوك المظلم عن الفاتح)
+   ========================================================================== */
+/* شكل الزرار الافتراضي (في الوضع المظلم) -> أزرق فاقع ومضيء */
+.schedule-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+    background-color: var(--bg-body); 
+    color: #00e5ff !important; /* أزرق فاقع (Electric Blue) */
+    border: 1px solid #00e5ff !important; /* إطار أزرق فاقع */
+    border-radius: 20px; 
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease; 
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
+}
+
+.schedule-btn:hover {
+    background-color: #00e5ff !important; 
+    color: #121212 !important; /* النص يقلب أسود مريح في الضلمة */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.7); 
+    transform: translateY(-2px);
+}
+
+/* شكل الزرار لما يقلب للوضع الفاتح (Light Mode) عشان ميبقاش فاقع بزيادة وعين الطالب ترتاح */
+body.light-mode .schedule-btn {
+    color: #037d93 !important; 
+    border-color: #037d93 !important;
+    box-shadow: none;
+}
+
+body.light-mode .schedule-btn:hover {
+    background-color: #037d93 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(3, 125, 147, 0.2);
+}
+
+.schedule-btn i {
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   2. MODERN HEADER
+   ========================================================================== */
+.modern-header {
+    grid-area: head;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(11, 11, 11, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+}
+
+body.light-mode .modern-header {
+    background: rgba(245, 246, 248, 0.7);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   🔥 PREMIUM LOGO STYLES 
+   ========================================================================== */
+.premium-logo {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-size: 26px; 
+    font-weight: 900; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.logo-prefix {
+    color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.logo-suffix {
+    color: #00bcd4;
+    margin-left: 2px;
+    background: linear-gradient(135deg, #00bcd4, #00e5ff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(0, 188, 212, 0.6));
+    position: relative;
+    font-style: italic;
+}
+
+.premium-logo:hover .logo-prefix {
+    color: #00bcd4;
+    -webkit-text-fill-color: #00bcd4;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+}
+
+.premium-logo:hover .logo-suffix {
+    background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+    transform: skewX(-5deg); 
+}
+
+.for-tag {
+    font-size: 13px;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 5px 14px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-style: oblique;
+}
+
+.header-schedule-box {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* ==========================================================================
+   3. HERO TITLE
+   ========================================================================== */
+.hero-title {
+    grid-area: hero;
+    text-align: center;
+    padding: 20px 20px 5px 20px;
+}
+
+.mota {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    direction: rtl;
+    text-shadow: 0 0 15px rgba(0, 188, 212, 0.1);
+}
+
+/* ==========================================================================
+   4. MAIN LAYOUT & FIXED SIDEBAR
+   ========================================================================== */
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 65px 1fr;
+    grid-template-areas: "sitting home";
+    column-gap: 20px;
+    padding: 0 4%;
+    direction: ltr;
+}
+
+#sidebar {
+    grid-area: sitting;
+    background-color: var(--bg-sidebar); 
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; 
+    height: fit-content;
+    position: sticky;
+    top: 95px;
+    transition: all 0.3s ease;
+}
+
+#sidebar a {
+    color: var(--text-muted);
+    font-size: 20px; 
+    text-decoration: none;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#sidebar a:hover {
+    color: #00bcd4; 
+    background-color: rgba(0, 188, 212, 0.06); 
+    transform: scale(1.08);
+}
+
+#theme-toggle:hover {
+    color: #f1c40f !important; 
+    background-color: rgba(241, 196, 15, 0.06) !important; 
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.4); 
+}
+
+/* ==========================================================================
+   5. SUBJECT CARDS & INNER DRIVE BUTTONS
+   ========================================================================== */
+#home {
+    grid-area: home;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.subject-card {
+    background: var(--bg-card); 
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    border-radius: 14px;
+    text-align: right; /* تعديل ليتناسب مع المحتوى العربي الجديد */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease;
+}
+
+/* إضافة كلاس الوصف الجديد للسيو */
+.subject-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    direction: rtl;
+}
+
+.subject-card:hover {
+    transform: translateY(-6px);
+    border-color: #00bcd4;
+    box-shadow: 0 12px 20px rgba(0, 188, 212, 0.05);
+}
+
+body.light-mode .subject-card:hover {
+    border-color: #037d93; 
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08); 
+}
+
+.subject-card h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-main);
+    text-transform: capitalize;
+    border-right: 3px solid #00bcd4; /* تحويل لليمين ليناسب العربي */
+    padding-right: 10px;
+    border-left: none;
+    padding-left: 0;
+    direction: rtl;
+}
+
+.subject-drive-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: rgba(0, 188, 212, 0.07);
+    border: 1px dashed rgba(0, 188, 212, 0.4);
+    color: #00bcd4 !important;
+    font-weight: 600;
+    font-size: 13.5px !important;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    direction: rtl;
+}
+
+.subject-drive-btn:hover {
+    background-color: #00bcd4 !important;
+    color: #000000 !important;
+    border-style: solid;
+    transform: scale(1.02);
+}
+
+body.light-mode .subject-drive-btn {
+    background-color: rgba(3, 125, 147, 0.05);
+    border-color: rgba(3, 125, 147, 0.3);
+    color: #037d93 !important;
+}
+
+body.light-mode .subject-drive-btn:hover {
+    background-color: #037d93 !important;
+    color: #ffffff !important;
+}
+
+.card-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card-body ul li {
+    margin-bottom: 14px;
+}
+
+.card-body ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.card-body h4 {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 25px 0 12px 0;
+    text-align: right;
+    direction: rtl;
+}
+
+.disabled {
+    color: #555555 !important;
+    font-size: 13px !important;
+    pointer-events: none;
+    text-align: right;
+    display: block !important;
+    direction: rtl;
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+footer {
+    grid-area: footer;
+    border-top: 1px solid var(--border-color);
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    gap: 20px; 
+    background-color: var(--bg-body);
+    direction: ltr;
+    transition: background-color 0.3s ease;
+}
+
+footer > h5 {
+    color: var(--text-main);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-btn:hover {
+    transform: translateY(-4px);
+}
+
+.email-btn:hover {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: #000;
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.2);
+}
+
+.whatsapp-btn:hover {
+    background-color: #25D366;
+    border-color: #25D366;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2);
+}
+
+.content p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+.content p span {
+    color: #00bcd4;
+    font-weight: bold;
+}
+
+.footer-disclaimer {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.disclaimer-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+    direction: rtl;
+}
+
+.policy-links a {
+    color: #00bcd4; 
+    text-decoration: none;
+    font-size: 12px;
+    transition: text-decoration 0.2s;
+}
+
+.policy-links a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN (الميديا كويري الاحترافية والمعدلة بالملي للـ S8+)
+   ========================================================================== */
+@media screen and (min-width: 441px) and (max-width: 770px) {
+    .modern-header {
+        padding: 15px 20px;
+    }
+    
+    .hero-title {
+        padding: 15px 10px 5px 10px;
+    }
+    
+    .mota {
+        font-size: 22px;
+    }
+
+    main {
+        grid-template-columns: 55px 1fr;
+        column-gap: 12px;
+        padding: 0 10px;
+    }
+
+    #sidebar {
+        padding: 15px 0;
+        gap: 15px;
+    }
+
+    #sidebar a {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    #home {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .contact-btn {
+        gap: 6px;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    .premium-logo {
+        font-size: 16px;
+        font-weight: 700; 
+    } 
+    .for-tag {
+        font-size: 11px;
+        padding: 2px 10px;
+    }
+    .schedule-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}
+
+
+@media screen and  (max-width:440px) {
+    
+    .modern-header {
+        padding: 10px 12px;
+        flex-direction: row; 
+        gap: 10px;
+        text-align: center;
+    }
+
+    .mota {
+        font-size: 18px;
+    }
+
+    main {
+        grid-template-columns: 45px 1fr; 
+        column-gap: 8px;
+        padding: 0 5px;
+    }
+
+    #sidebar {
+        padding: 10px 0;
+        gap: 12px;
+    }
+
+    #sidebar a {
+        width: 32px;  
+        height: 32px;
+        font-size: 16px;
+    }
+
+    #home {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+        padding: 5px;
+    }
+
+    .premium-logo{
+        font-size: 11px;
+        font-weight: 600; 
+            letter-spacing: 1.5px; 
+    } 
+    .logo-suffix{
+         margin-left:3px ;
+    }
+    .for-tag{
+          font-size: 9px;
+    color:var(--text-main);
+    
+    padding: 2px 10px;
+    }
+    .schedule-btn {
+    padding: 8px 16px;
+    font-size: 10px;
+  
+}
+
+    .footer-contact {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .contact-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}
