@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول للمذاكرة الفعالة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .intro-text {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 35px auto;
+            font-size: 1.05rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--primary);
+            padding-right: 10px;
+        }
+
+        /* تنسيق الجدول */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            min-width: 600px;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 14px 16px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* التحكم بالخلايا للشاشات الكبيرة */
+        .col-time {
+            width: 180px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .col-activity {
+            width: 300px;
+            font-weight: 500;
+        }
+
+        /* قسم النصائح */
+        .tips-section {
+            background-color: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .tips-list li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .tips-list li strong {
+            color: #0f172a;
+        }
+
+        .footer-wish {
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* تحويل الجدول إلى بطاقات مرنة ومريحة على الموبايل */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            /* إخفاء رأس الجدول */
+            table thead {
+                display: none;
+            }
+
+            /* تحويل عناصر الجدول إلى عناصر كتلية */
+            table,
+            tbody,
+            tr,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            /* تنسيق بطاقة الفترة الزمنية */
+            table tr {
+                background: #ffffff;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                margin-bottom: 15px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            }
+
+            table td {
+                border: none;
+                padding: 6px 0;
+                font-size: 0.95rem;
+                text-align: right;
+            }
+
+            /* تمييز وقت الفترة وتكبيره */
+            .col-time {
+                font-size: 1.05rem;
+                color: var(--primary);
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            /* إضافة نصوص توضيحية جانبية قبل النشاط والملاحظات للموبايل فقط */
+            .col-activity::before {
+                content: "النشاط: ";
+                font-weight: 700;
+                color: var(--text-muted);
+            }
+
+            table td:last-child::before {
+                content: "ملاحظة: ";
+                font-weight: 700;
+                color: var(--text-muted);
+            }
+
+            .tips-section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>جدول للمذاكرة الفعالة</h1>
+        <p class="intro-text">إن الالتزام بالوقت هو مفتاح النجاح في الدراسة، ويساعدك الجدول الدراسي على تنظيم وقتك
+            والتحصيل بأعلى كفاءة ممكنة. ويجب التنويه أن هذا الجدول هو نموذج تفصيلي يومي يمكنك تعديله ليناسب احتياجاتك
+            ومواعيدك الشخصية.</p>
+
+        <h2>نموذج لجدول دراسي يومي</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="col-time">الوقت</th>
+                        <th class="col-activity">النشاط</th>
+                        <th>الملاحظات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-time">07:00 - 08:00 صباحاً</td>
+                        <td class="col-activity">الاستيقاظ، الفطور، الاستعداد لفهم الدراسي</td>
+                        <td>ابدأ يومك بنشاط وتناول فطوراً صحياً.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">08:00 - 09:30 صباحاً</td>
+                        <td class="col-activity">(المادة 1) : مثلاً الرياضيات</td>
+                        <td>فترة التركيز القصوى، ابدأ بالمواد الصعبة.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">09:30 - 10:00 صباحاً</td>
+                        <td class="col-activity">راحة قصيرة</td>
+                        <td>قم ببعض التمارين الخفيفة أو اشرب كوباً من الماء.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">10:00 - 11:30 صباحاً</td>
+                        <td class="col-activity">(المادة 2) : مثلاً اللغة العربية</td>
+                        <td>مراجعة، حل تمارين.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">11:30 - 12:30 ظهراً</td>
+                        <td class="col-activity">الغداء والراحة</td>
+                        <td>استرخِ تماماً وابتعد عن الدراسة.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">12:30 - 02:00 ظهراً</td>
+                        <td class="col-activity">(المادة 3) : مثلاً العلوم / التاريخ</td>
+                        <td>قراءة، تلخيص، حل أسئلة.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">02:00 - 02:30 ظهراً</td>
+                        <td class="col-activity">راحة قصيرة</td>
+                        <td>فترة استراحة لتكملة (مشي، هواية).</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">02:30 - 04:00 عصراً</td>
+                        <td class="col-activity">(المادة 4) : مثلاً اللغة الإنجليزية</td>
+                        <td>تدريب على القواعد، مفردات، مراجعة.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">04:00 - 06:00 مساءً</td>
+                        <td class="col-activity">وقت حر / أنشطة ترفيهية / رياضية</td>
+                        <td>مارس هواياتك المفضلة لتجديد نشاطك اليومي.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">06:00 - 07:30 مساءً</td>
+                        <td class="col-activity">مراجعة عامة / حل واجبات</td>
+                        <td>راجع ما درسته خلال اليوم، أكمل الواجبات.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">07:30 - 08:30 مساءً</td>
+                        <td class="col-activity">العشاء ووقت العائلة</td>
+                        <td>استمتع بوقتك مع العائلة.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">08:30 - 09:30 مساءً</td>
+                        <td class="col-activity">قراءة حرة / تحضير لليوم التالي</td>
+                        <td>اقرأ كتاباً، جهز أدواتك ليوم الغد.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-time">09:30 مساءً وما بعدها</td>
+                        <td class="col-activity">الاستعداد للنوم</td>
+                        <td>احصل على قسط كافٍ من النوم (7 إلى 8) ساعات.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tips-section">
+            <h2>نصائح لتحقيق أقصى استفادة من جدولك الدراسي:</h2>
+            <ul class="tips-list">
+                <li><strong>المرونة:</strong> لا تجعل جدولك جامداً، اسمح ببعض المرونة للتكيف مع الظروف غير المتوقعة.
+                </li>
+                <li><strong>المكافآت:</strong> كافئ نفسك بعد إنجاز أهدافك الدراسية، سيساعدك هذا على البقاء متحفزاً.</li>
+                <li><strong>تجنب المشتتات:</strong> خصص مكاناً هادئاً للمذاكرة وابتعد عن الهاتف ووسائل التواصل
+                    الاجتماعي.</li>
+                <li><strong>النوم الكافي:</strong> احصل على 7 إلى 8 ساعات من النوم ليلاً لتحسين تركيزك وذاكرتك.</li>
+                <li><strong>التغذية السليمة:</strong> تناول وجبات صحية واشرب كميات كافية من الماء.</li>
+                <li><strong>المراجعة الدورية:</strong> راجع المواد بانتظام لتثبيت المعلومات وتجنب نسيانها.</li>
+                <li><strong>تحديد الأهداف:</strong> قبل البدء بالمذاكرة، حدد أهدافاً واضحة لكل جلسة (ماذا ستدرس؟ وماذا
+                    تريد أن تنجز؟).</li>
+                <li><strong>تقنية بومودورو:</strong> يمكنك استخدام هذه التقنية (25 دقيقة دراسة مركزة تليها 5 دقائق راحة)
+                    لزيادة الإنتاجية.</li>
+                <li><strong>لا تخف من التغيير:</strong> إذا وجدت أن جزءاً من الجدول لا يعمل بشكل جيد، قم بتعديله. إنه
+                    جدولك ويجب أن يناسبك.</li>
+            </ul>
+            <p class="footer-wish">أتمنى لك كل التوفيق في دراستك!</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
